@@ -7,11 +7,11 @@ The Bodhi HPC cluster is migrating from **IBM Spectrum LSF** to **SLURM**. This 
 
 ## Quick-start checklist
 
-- [ ] Replace `#BSUB` directives with `#SBATCH` equivalents ([Directives](directives.md))
-- [ ] Update submission and monitoring commands ([Commands](commands.md))
-- [ ] Replace `$LSB_*` environment variables with `$SLURM_*` equivalents ([Environment Variables](environment-variables.md))
-- [ ] Review job array syntax changes ([Job Arrays](job-arrays.md))
-- [ ] Test your converted scripts with a short run before submitting production jobs
+- 🔀 Replace `#BSUB` directives with `#SBATCH` equivalents ([Directives](directives.md))
+- 🖥️ Update submission and monitoring commands ([Commands](commands.md))
+- 🔤 Replace `$LSB_*` environment variables with `$SLURM_*` equivalents ([Environment Variables](environment-variables.md))
+- 🔢 Review job array syntax changes ([Job Arrays](job-arrays.md))
+- ✅ Test your converted scripts with a short run before submitting production jobs
 
 ## Key differences at a glance
 
