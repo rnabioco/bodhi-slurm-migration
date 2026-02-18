@@ -35,6 +35,7 @@ nav:
       - Commands: commands.md
       - Environment Variables: environment-variables.md
       - Job Arrays: job-arrays.md
+      - Common Pain Points: pain-points.md
   - Examples:
       - Scripts: example-scripts.md
       - Converter: conversion-script.md
