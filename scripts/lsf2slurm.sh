@@ -40,7 +40,7 @@ s/^#BSUB +-q +(.+)/#SBATCH --partition=\1/
 s/^#BSUB +-o +(.+)/#SBATCH --output=\1/
 s/^#BSUB +-e +(.+)/#SBATCH --error=\1/
 s/^#BSUB +-n +(.+)/#SBATCH --ntasks=\1/
-s/^#BSUB +-M +(.+)/#SBATCH --mem=\1MB/
+s/^#BSUB +-M +(.+)/#SBATCH --mem=\1G/
 s/^#BSUB +-N/#SBATCH --mail-type=END/
 s/^#BSUB +-B/#SBATCH --mail-type=BEGIN/
 s/^#BSUB +-u +(.+)/#SBATCH --mail-user=\1/
@@ -48,6 +48,12 @@ s/^#BSUB +-P +(.+)/#SBATCH --account=\1/
 s/^#BSUB +-H/#SBATCH --hold/
 s/^#BSUB +-r/#SBATCH --requeue/
 s/^#BSUB +-x/#SBATCH --exclusive/
+s/^#BSUB +-m +(.+)/#SBATCH --nodelist=\1/
+s/^#BSUB +-R +"[^"]*rusage\[mem=([0-9]*)\][^"]*"/#SBATCH --mem=\1G/
+s/^#BSUB +-gpu +"num=([0-9]*)[^"]*"/#SBATCH --gpus=\1/
+s/^#BSUB +-app[^"]*//
+
+
 
 # ── Wall time: -W H:MM → --time=HH:MM:00 ──
 /^#BSUB +-W +[0-9]+:[0-9]+/ {
