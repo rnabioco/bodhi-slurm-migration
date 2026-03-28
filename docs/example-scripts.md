@@ -203,3 +203,5 @@ Complete before/after examples for common job types. Each example shows the full
 
 !!! tip "Interactive jobs"
     In SLURM, `srun --pty bash` gives you an interactive shell on a compute node. You can also use `salloc` to allocate resources first, then `srun` within that allocation.
+
+    For a **persistent** interactive session that survives SSH disconnects, see the [`sinteractive` script](sinteractive.md).

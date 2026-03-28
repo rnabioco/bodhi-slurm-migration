@@ -39,6 +39,7 @@ nav:
   - Examples:
       - Scripts: example-scripts.md
       - Converter: conversion-script.md
+      - Interactive Sessions: sinteractive.md
   - Resources: resources.md
 
 markdown_extensions:
