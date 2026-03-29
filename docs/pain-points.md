@@ -70,7 +70,8 @@ sstat -j <jobid> --format=JobID,MaxRSS,MaxVMSize
     #SBATCH --mem-per-cpu=4G   # 32 GB total
     ```
 
-<!-- TODO: verify default --mem value on Bodhi if no --mem is specified -->
+!!! info "Default memory when `--mem` is not specified"
+    Bodhi's default is `DefMemPerCPU=4000` (4 GB per CPU). So a job requesting `--cpus-per-task=4` with no `--mem` gets 16 GB total. A single-CPU job gets 4 GB.
 
 !!! note "Don't just request the maximum"
     Requesting far more memory than you need reduces scheduling priority and wastes cluster resources. Right-size your requests based on actual usage from `seff`.
@@ -100,7 +101,28 @@ sacctmgr show associations user=$USER format=Account,Partition,QOS
 sacctmgr show associations user=$USER format=Account --noheader | sort -u
 ```
 
-<!-- TODO: verify what Bodhi accounts look like — are they PI-based (e.g., "hesselj"), lab-based (e.g., "rbi"), or project-based? -->
+Bodhi accounts are **lab/group-based**. Each account corresponds to a research group or resource class:
+
+| Account | Description |
+|---|---|
+| `bmg` | Biochemistry and Molecular Genetics |
+| `rbi` | RNA Bioscience Initiative |
+| `jones` | Jones lab (Pediatrics) |
+| `genome` | Genome group |
+| `scb` | SCB group (SOM Hematology) |
+| `gpu_rbi` | GPU access for RBI |
+| `gpu_scb` | GPU access for SCB |
+| `bigmem` | Large-memory node access |
+| `cranio` | Craniofacial group |
+| `normal` | General/shared access |
+| `peds_devbio` | Pediatrics Developmental Biology |
+| `peds_hematology` | Pediatrics Hematology |
+| `som_hematology` | SOM Hematology |
+| `som_dermatology` | SOM Dermatology |
+| `medical_oncology` | Medical Oncology |
+| `gastroenterology` | Gastroenterology |
+
+Most users are associated with their PI's lab account. You may belong to multiple accounts (e.g., `rbi` for CPU jobs and `gpu_rbi` for GPU jobs).
 
 ### Setting a default account
 
@@ -130,7 +152,8 @@ export SRUN_ACCOUNT=<your_account>
 #SBATCH --account=<your_account>
 ```
 
-<!-- TODO: verify if --account is required on Bodhi or if there's a cluster-wide default -->
+!!! warning "`--account` is effectively required on Bodhi"
+    Bodhi enforces `AccountingStorageEnforce=associations,limits,qos`, which means jobs are **rejected** if your user lacks a valid account association for the target partition and QoS. If you have only one account, Slurm uses it automatically. If you have multiple accounts, set a default (see above) to avoid specifying `--account` on every submission.
 
 ---
 
@@ -141,7 +164,7 @@ export SRUN_ACCOUNT=<your_account>
 In SLURM, the `--time` (wall time) limit is a **hard cutoff**. When your job hits the limit:
 
 1. SLURM sends `SIGTERM` to your job (giving it a chance to clean up)
-2. After a short grace period<!-- TODO: verify grace period on Bodhi — typically 30-60 seconds -->, SLURM sends `SIGKILL`
+2. After a 30-second grace period (`KillWait=30`), SLURM sends `SIGKILL`
 3. The job state is set to `TIMEOUT`
 
 ```bash
@@ -193,15 +216,22 @@ squeue -j $SLURM_JOB_ID -h -o "%L"
 
 ### Bodhi partition time limits
 
-<!-- TODO: verify these partition limits — values below are placeholders -->
+| Partition | Max wall time | Default wall time | Nodes | Access | Notes |
+|---|---|---|---|---|---|
+| `normal` | 3 days | not set | compute01–04, 06–07, 14 | All accounts | Default partition |
+| `rna` | 3 days | not set | compute07–09, 15–20 | `rbi` | Falls back to `normal` |
+| `jones` | 3 days | not set | compute04–05, 10–12 | `jones` | |
+| `genome` | 3 days | not set | compute06–09 | `genome` | Falls back to `normal` |
+| `gpu` | 3 days | not set | compgpu01, 03 | `gpu_rbi` | 8× NVIDIA A30 |
+| `scb_gpu` | 3 days | not set | compgpu02 | `gpu_scb` | 4× NVIDIA A30 |
+| `scb` | 3 days | not set | compute13 | `scb` | |
+| `cranio` | 3 days | not set | compute21 | `scb` | Falls back to `normal` |
+| `bigmem` | 3 days | not set | compute14 | `bigmem` | ~1.5 TB RAM |
+| `rstudio` | 3 days | not set | compute00 | `bigmem` | Interactive RStudio |
+| `voila` | 3 days | not set | compute00 | `bigmem` | Voilà notebooks |
 
-| Partition | Max wall time | Default wall time | Notes |
-|---|---|---|---|
-| `short` | 4 hours | 1 hour | Quick jobs, higher priority |
-| `normal` | 7 days | 1 hour | General-purpose |
-| `long` | 30 days | 1 hour | Extended runs |
-| `gpu` | 7 days | 1 hour | GPU jobs |
-| `interactive` | 12 hours | 1 hour | Interactive sessions |
+!!! warning "No default wall time is set"
+    If you omit `--time`, your job inherits the partition's `MaxTime` (3 days). **Always specify `--time`** — shorter jobs schedule faster via backfill, and you avoid tying up resources longer than needed.
 
 !!! note "Check current limits"
     Partition limits can change. Verify the current limits with:
