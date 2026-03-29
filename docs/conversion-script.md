@@ -1,6 +1,6 @@
 # Converter Script: `lsf2slurm.sh`
 
-We provide a helper script that automates the most common LSF-to-SLURM conversions. It's located at [`scripts/lsf2slurm.sh`](https://github.com/rnabioco/bodhi-slurm-migration/blob/main/scripts/lsf2slurm.sh) in this repository.
+We provide a helper script that automates the most common LSF-to-SLURM conversions. It's located at [`scripts/lsf2slurm.sh`](https://github.com/rnabioco/bodhi-docs/blob/main/scripts/lsf2slurm.sh) in this repository.
 
 ## Usage
 

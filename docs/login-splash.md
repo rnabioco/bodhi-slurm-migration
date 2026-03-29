@@ -20,7 +20,7 @@ The `bodhi-splash` script displays a login splash screen with system information
 │     The 'a100' partition is now available for jobs.                   │
 ├──────────────────────────────────────────────────────────────────────┤
 │ Help:  David Farrell                                                 │
-│ Docs:  https://rnabioco.github.io/bodhi-slurm-migration/            │
+│ Docs:  https://rnabioco.github.io/bodhi-docs/                       │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -117,7 +117,7 @@ All settings are controlled via environment variables with sensible defaults:
 | `BODHI_SPLASH_HOSTS` | *(unset — show everywhere)* | Hostname glob to restrict to login nodes |
 | `BODHI_HELP_CONTACT` | `David Farrell` | Help contact name |
 | `BODHI_HELP_EMAIL` | *(unset)* | Help contact email |
-| `BODHI_DOCS_URL` | `https://rnabioco.github.io/bodhi-slurm-migration/` | Documentation URL |
+| `BODHI_DOCS_URL` | `https://rnabioco.github.io/bodhi-docs/` | Documentation URL |
 
 To restrict the splash to login nodes only:
 

@@ -1,8 +1,8 @@
 [project]
 site_name = "Bodhi HPC User Guide"
-site_url = "https://rnabioco.github.io/bodhi-slurm-migration/"
-repo_url = "https://github.com/rnabioco/bodhi-slurm-migration"
-repo_name = "rnabioco/bodhi-slurm-migration"
+site_url = "https://rnabioco.github.io/bodhi-docs/"
+repo_url = "https://github.com/rnabioco/bodhi-docs"
+repo_name = "rnabioco/bodhi-docs"
 
 nav = [
   {"Home" = "index.md"},

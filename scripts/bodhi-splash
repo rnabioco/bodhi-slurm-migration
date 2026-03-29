@@ -28,7 +28,7 @@ __bodhi_splash_main() {
     local _motd_file="${BODHI_MOTD_FILE:-/etc/bodhi/motd}"
     local _help_contact="${BODHI_HELP_CONTACT:-David Farrell}"
     local _help_email="${BODHI_HELP_EMAIL:-}"
-    local _docs_url="${BODHI_DOCS_URL:-https://rnabioco.github.io/bodhi-slurm-migration/}"
+    local _docs_url="${BODHI_DOCS_URL:-https://rnabioco.github.io/bodhi-docs/}"
 
     # -- Colors (ANSI SGR) -----------------------------------------------
     local _rst _bold _dim _yellow _cyan

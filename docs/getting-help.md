@@ -17,4 +17,4 @@
 ## Additional resources
 
 - [SLURM Resources](resources.md) — official SLURM documentation and migration guides
-- [Bodhi HPC GitHub](https://github.com/rnabioco/bodhi-slurm-migration) — source for this documentation and helper scripts
+- [Bodhi HPC GitHub](https://github.com/rnabioco/bodhi-docs) — source for this documentation and helper scripts

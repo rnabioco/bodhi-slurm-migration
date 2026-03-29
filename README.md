@@ -1,8 +1,8 @@
-# Bodhi LSF → SLURM Migration Guide
+# Bodhi HPC User Guide
 
-Documentation site for migrating from IBM Spectrum LSF to SLURM on the Bodhi HPC cluster.
+Documentation site for the Bodhi HPC cluster — SLURM usage, backups, and support contacts.
 
-**Live site:** <https://rnabioco.github.io/bodhi-slurm-migration/>
+**Live site:** <https://rnabioco.github.io/bodhi-docs/>
 
 ## Local development
 
@@ -24,7 +24,7 @@ A sed-based helper that converts common `#BSUB` directives and `$LSB_*` variable
 bash scripts/lsf2slurm.sh myjob.lsf > myjob.slurm
 ```
 
-See the [converter documentation](https://rnabioco.github.io/bodhi-slurm-migration/conversion-script/) for details on what it does and doesn't handle.
+See the [converter documentation](https://rnabioco.github.io/bodhi-docs/conversion-script/) for details on what it does and doesn't handle.
 
 ## Deployment
 
