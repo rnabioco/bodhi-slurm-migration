@@ -9,6 +9,8 @@
 #
 # Suppress with: BODHI_NOSPLASH=1, or touch ~/.hushlogin
 
+{ set +o history; } 2>/dev/null
+
 __bodhi_splash_main() {
 
     # -- Guards ----------------------------------------------------------
@@ -342,3 +344,5 @@ __bodhi_splash_main() {
 
 __bodhi_splash_main "$@"
 unset -f __bodhi_splash_main
+
+{ set -o history; } 2>/dev/null
