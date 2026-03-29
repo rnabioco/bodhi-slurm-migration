@@ -1,5 +1,8 @@
 # Bodhi HPC User Guide
 
+!!! warning "Scheduled Maintenance"
+    Bodhi undergoes scheduled maintenance on the **last Thursday of every month**. Jobs may be held or killed during the maintenance window. Plan your submissions accordingly.
+
 Welcome to the documentation site for the **Bodhi HPC cluster**. Use the sections below to find what you need.
 
 ---
