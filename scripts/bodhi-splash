@@ -176,7 +176,7 @@ __bodhi_splash_main() {
         if (( days_until <= 0 )); then
             _bs_top
             _bs_row_colored_full "MAINTENANCE TODAY: ${maint_date_str}" "$_bg_red"
-            _bs_row_colored_full "The cluster will be unavailable. Save your work." "$_bg_red"
+            _bs_row_colored_full "The cluster will be unavailable. LOG OFF NOW." "$_bg_red"
         elif (( days_until <= 1 )); then
             _bs_top
             _bs_row_colored_full "MAINTENANCE TOMORROW: ${maint_date_str}" "$_bg_red"
