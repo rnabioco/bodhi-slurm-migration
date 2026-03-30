@@ -218,21 +218,40 @@ squeue -j $SLURM_JOB_ID -h -o "%L"
 
 | Partition | Max wall time | Default wall time | Nodes | Access | Notes |
 |---|---|---|---|---|---|
-| `normal` | 3 days | not set | compute01–04, 06–07, 14 | All accounts | Default partition |
+| `normal` | 3 days | **4 hours** | compute01–04, 06–07, 14 | All accounts | Default partition |
 | `interactive` | 1 day | 8 hours | compute03–04, 06–07 | All accounts | Max 3 jobs/user |
-| `rna` | 3 days | not set | compute07–09, 15–20 | `rbi` | Falls back to `normal` |
-| `jones` | 3 days | not set | compute04–05, 10–12 | `jones` | |
-| `genome` | 3 days | not set | compute06–09 | `genome` | Falls back to `normal` |
-| `gpu` | 3 days | not set | compgpu01, 03 | `gpu_rbi` | 8× NVIDIA A30 |
-| `scb_gpu` | 3 days | not set | compgpu02 | `gpu_scb` | 4× NVIDIA A30 |
-| `scb` | 3 days | not set | compute13 | `scb` | |
-| `cranio` | 3 days | not set | compute21 | `scb` | Falls back to `normal` |
-| `bigmem` | 3 days | not set | compute14 | `bigmem` | ~1.5 TB RAM |
-| `rstudio` | 3 days | not set | compute00 | `bigmem` | Interactive RStudio |
-| `voila` | 3 days | not set | compute00 | `bigmem` | Voilà notebooks |
+| `rna` | 3 days | **4 hours** | compute07–09, 15–20 | `rbi` | Falls back to `normal` |
+| `jones` | 3 days | **4 hours** | compute04–05, 10–12 | `jones` | |
+| `genome` | 3 days | **4 hours** | compute06–09 | `genome` | Falls back to `normal` |
+| `gpu` | 3 days | **12 hours** | compgpu01, 03 | `gpu_rbi` | 8× NVIDIA A30 |
+| `scb_gpu` | 3 days | **12 hours** | compgpu02 | `gpu_scb` | 4× NVIDIA A30 |
+| `scb` | 3 days | **4 hours** | compute13 | `scb` | |
+| `cranio` | 3 days | **4 hours** | compute21 | `scb` | Falls back to `normal` |
+| `bigmem` | 3 days | **4 hours** | compute14 | `bigmem` | ~1.5 TB RAM |
+| `rstudio` | 3 days | **8 hours** | compute00 | `bigmem` | Interactive RStudio |
+| `voila` | 3 days | **4 hours** | compute00 | `bigmem` | Voilà notebooks |
 
-!!! warning "No default wall time is set"
-    If you omit `--time`, your job inherits the partition's `MaxTime` (3 days). **Always specify `--time`** — shorter jobs schedule faster via backfill, and you avoid tying up resources longer than needed.
+!!! warning "Default wall time changed — jobs may time out"
+    If you omit `--time`, your job now gets **4 hours** (general partitions) or **12 hours** (GPU partitions). Previously, jobs without `--time` silently inherited the 3-day maximum.
+
+    **If your jobs are timing out**, add `--time` with a realistic estimate:
+
+    ```bash
+    #SBATCH --time=8:00:00       # 8 hours
+    #SBATCH --time=1-00:00:00    # 1 day
+    ```
+
+    For jobs that need more than 3 days, use the `long` QoS (up to 7 days):
+
+    ```bash
+    #SBATCH --qos=long
+    #SBATCH --time=5-00:00:00    # 5 days
+    ```
+
+    **Why the change?** Shorter default times dramatically improve scheduling. SLURM's backfill scheduler can only fit jobs into gaps if it knows when running jobs will end. A job with no `--time` previously looked like a 3-day job to the scheduler — even if it finished in 20 minutes — blocking other jobs from backfilling into the gap.
+
+!!! tip "Right-size your `--time` requests"
+    Request about 20–30% more than your expected runtime. Use `seff <jobid>` to check how long past jobs actually took. Shorter time requests schedule faster via backfill.
 
 !!! note "Check current limits"
     Partition limits can change. Verify the current limits with:
