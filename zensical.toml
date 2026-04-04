@@ -22,7 +22,11 @@ nav = [
     ]},
     {"Resources" = "resources.md"},
   ]},
-  {"Backups" = "backups.md"},
+  {"Positron SSH" = "https://github.com/rnabioco/remote-ssh-positron"},
+  {"Backups" = [
+    {"Backup Instructions" = "backups.md"},
+    {"PetaLibrary" = "https://curc.readthedocs.io/en/latest/petalibrary/index.html#"},
+  ]},
   {"Admin" = "admin.md"},
   {"Getting Help" = "getting-help.md"},
 ]

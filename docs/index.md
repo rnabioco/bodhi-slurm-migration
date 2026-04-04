@@ -21,11 +21,16 @@ Bodhi has migrated from IBM Spectrum LSF to **SLURM**. Our SLURM documentation c
 - [**Interactive Sessions**](sinteractive.md) — persistent interactive jobs with tmux
 - [**Resources**](resources.md) — links to official SLURM documentation
 
+## Positron SSH
+
+- [**Remote SSH Setup**](https://github.com/rnabioco/remote-ssh-positron) — using Positron over remote SSH
+
 ## Backups
 
 Guidelines for backing up your data on the Bodhi cluster.
 
 - [**Backup Instructions**](backups.md) — what to back up, where, and how
+- [**PetaLibrary**](https://curc.readthedocs.io/en/latest/petalibrary/index.html#) — CU Research Computing PetaLibrary backup system
 
 ## Getting Help
 
